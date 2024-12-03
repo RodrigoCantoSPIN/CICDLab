@@ -28,7 +28,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14' # Specifies Node.js version 14, which is commonly compatible with React Native
+          node-version: '20' # Specifies Node.js version 14, which is commonly compatible with React Native
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -43,7 +43,7 @@ jobs:
       - name: Build ${{ matrix.platform }}
         run: |
           if [ "${{ matrix.platform }}" == "android" ]; then
-           cd android && ./gradlew assembleRelease
+            cd android && ./gradlew assembleRelease
           elif [ "${{ matrix.platform }}" == "ios" ]; then
             xcodebuild -workspace ios/YourApp.xcworkspace -scheme YourApp -configuration Release -sdk iphoneos
           fi
