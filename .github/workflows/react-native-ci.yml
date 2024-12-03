@@ -28,7 +28,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18' # Specifies Node.js version 14, which is commonly compatible with React Native
+          node-version: '20' # Specifies Node.js version 14, which is commonly compatible with React Native
 
       # Step 3: Install dependencies
       - name: Install dependencies
