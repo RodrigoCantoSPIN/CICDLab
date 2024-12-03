@@ -1,0 +1,49 @@
+name: React Native CI/CD Pipeline # Name of the workflow for easy identification
+
+# Define when the workflow should run
+on:
+  push:
+    branches:
+      - main # Runs on pushes to the main branch
+  pull_request:
+    branches:
+      - main # Runs on pull requests to the main branch
+
+jobs:
+  build:
+    name: Build iOS and Android # Job to build the app for both platforms
+    runs-on: ubuntu-latest # Runs on the latest Ubuntu environment
+
+    # Define a matrix for building on both Android and iOS
+    strategy:
+      matrix:
+        platform: [android, ios] # This matrix will run the build job twice, once for each platform
+
+    steps:
+      # Step 1: Check out the repository code
+      - name: Check out code
+        uses: actions/checkout@v2 # Uses GitHub's official action to check out the code
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # Specifies Node.js version 14, which is commonly compatible with React Native
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install # Installs all project dependencies listed in package.json
+
+      # Step 4: Run TypeScript checks
+      - name: TypeScript Check
+        run: npx tsc #--noEmit
+        # Runs TypeScript compiler in check-only mode (`--noEmit`), ensuring no type errors without producing output files.
+
+      # Step 5: Build for each platform using a conditional matrix
+      - name: Build ${{ matrix.platform }}
+        run: |
+          if [ "${{ matrix.platform }}" == "android" ]; then
+            npm run android-build # Build command for Android (defined in package.json scripts)
+          elif [ "${{ matrix.platform }}" == "ios" ]; then
+            npm run ios-build # Build command for iOS (defined in package.json scripts)
+          fi
