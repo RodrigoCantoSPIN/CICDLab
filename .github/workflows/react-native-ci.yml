@@ -28,7 +28,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # Specifies Node.js version 14, which is commonly compatible with React Native
+          node-version: 'v20.13.1' # Specifies Node.js version 14, which is commonly compatible with React Native
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -37,6 +37,12 @@ jobs:
       # Step 4: Run TypeScript checks
       - name: TypeScript Check
         run: npx tsc #--noEmit
+      - name: Update Java version
+        uses: actions/setup-java@4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
         # Runs TypeScript compiler in check-only mode (`--noEmit`), ensuring no type errors without producing output files.
       # Step 5: Build for each platform using a conditional matrix
       #          elif [ "$-{{ matrix.platform }}" == "ios" ]; then
