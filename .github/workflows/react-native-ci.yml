@@ -37,13 +37,13 @@ jobs:
       # Step 4: Run TypeScript checks
       - name: TypeScript Check
         run: npx tsc #--noEmit
-      - name: Update Java version
-        uses: actions/setup-java@4
-        with:
-          distribution: 'temurin'
-          java-version: '21'
+      # - name: Update Java version
+      #   uses: actions/setup-java@4
+      #   with:
+      #     distribution: 'temurin'
+      #     java-version: '21'
 
-        # Runs TypeScript compiler in check-only mode (`--noEmit`), ensuring no type errors without producing output files.
+      # Runs TypeScript compiler in check-only mode (`--noEmit`), ensuring no type errors without producing output files.
       # Step 5: Build for each platform using a conditional matrix
       #          elif [ "$-{{ matrix.platform }}" == "ios" ]; then
       #xcodebuild -workspace ios/YourApp.xcworkspace -scheme YourApp -configuration Release -sdk iphoneos
