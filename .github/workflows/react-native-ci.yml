@@ -38,12 +38,11 @@ jobs:
       - name: TypeScript Check
         run: npx tsc #--noEmit
         # Runs TypeScript compiler in check-only mode (`--noEmit`), ensuring no type errors without producing output files.
-
       # Step 5: Build for each platform using a conditional matrix
+      #          elif [ "$-{{ matrix.platform }}" == "ios" ]; then
+      #xcodebuild -workspace ios/YourApp.xcworkspace -scheme YourApp -configuration Release -sdk iphoneos
       - name: Build ${{ matrix.platform }}
         run: |
           if [ "${{ matrix.platform }}" == "android" ]; then
             cd android && ./gradlew assembleRelease
-          elif [ "${{ matrix.platform }}" == "ios" ]; then
-            xcodebuild -workspace ios/YourApp.xcworkspace -scheme YourApp -configuration Release -sdk iphoneos
           fi
