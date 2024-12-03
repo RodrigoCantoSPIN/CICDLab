@@ -43,7 +43,7 @@ jobs:
       - name: Build ${{ matrix.platform }}
         run: |
           if [ "${{ matrix.platform }}" == "android" ]; then
-            npm run android-build # Build command for Android (defined in package.json scripts)
+           cd android && ./gradlew assembleRelease
           elif [ "${{ matrix.platform }}" == "ios" ]; then
-            npm run ios-build # Build command for iOS (defined in package.json scripts)
+            xcodebuild -workspace ios/YourApp.xcworkspace -scheme YourApp -configuration Release -sdk iphoneos
           fi
