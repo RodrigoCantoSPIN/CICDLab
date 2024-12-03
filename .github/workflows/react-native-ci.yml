@@ -22,13 +22,13 @@ jobs:
     steps:
       # Step 1: Check out the repository code
       - name: Check out code
-        uses: actions/checkout@v2 # Uses GitHub's official action to check out the code
+        uses: actions/checkout@v4 # Uses GitHub's official action to check out the code
 
       # Step 2: Set up Node.js environment
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '20' # Specifies Node.js version 14, which is commonly compatible with React Native
+          node-version: 20 # Specifies Node.js version 14, which is commonly compatible with React Native
 
       # Step 3: Install dependencies
       - name: Install dependencies
